@@ -20,22 +20,30 @@ const userSchema = new mongoose.Schema({
     required: true,
     minlength: 6,
   },
-  avatar: {
-    type: String,
-    default: "default-avatar.png",
+  age: {
+    type: Number,
+    required: true,
   },
-  bio: {
-    type: String,
-    maxlength: 160,
+  height: {
+    type: Number,
+    required: true,
+  },
+  weight: {
+    type: Number,
+    required: true,
+  },
+  targetweight: {
+    type: Number,
+    required: true,
   },
   dateJoined: {
     type: Date,
     default: Date.now,
   },
-  courses: [
+  trainer: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Course",
+      ref: "Trainer",
     },
   ],
 });

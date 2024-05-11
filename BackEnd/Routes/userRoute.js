@@ -31,14 +31,21 @@ router.post('/login', async (req, res) => {
 
       const token = jwt.sign({ userId: user._id },  process.env.JWT_SECRET, { expiresIn: '1h' });
 
-      res.status(200).json({ message: '{Login successful}', 'JWT' : token });
+      res.status(200).json({  user: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        bio: user.bio,
+        dateJoined: user.dateJoined,
+        course: user.courses,
+      }, authorization: {'token' : token,  type: 'barear'}});
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Failed to login' });
     }
   });
 
-router.get('/', async (req, res) => {
+router.get('/user', async (req, res) => {
   try {
     const users = await User.find();
     res.status(200).json(users);
@@ -49,4 +56,3 @@ router.get('/', async (req, res) => {
 });
 
 module.exports = router;
-

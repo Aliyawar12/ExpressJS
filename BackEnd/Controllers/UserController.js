@@ -3,7 +3,7 @@ const User = require("../Models/Users.js");
 
 exports.createUser = async (req, res) => {
   try {
-    const { name, email, password, avatar, bio, dateJoined, courses} =
+    const { name, email, password, age, height, weight, targetweight, dateJoined } =
       req.body;
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -12,10 +12,12 @@ exports.createUser = async (req, res) => {
       name: name,
       email: email,
       password: hashedPassword,
-      avatar: avatar,
-      bio: bio,
+      age: age, // Previously used 'number', corrected to 'age'
+      height: height, // Corrected variable name
+      weight: weight, // Corrected variable name
+      targetweight: targetweight, // Corrected variable name
       dateJoined: dateJoined,
-      course: courses,
+      //courses: courses, // Corrected variable name
     });
 
     const savedUser = await newUser.save();
